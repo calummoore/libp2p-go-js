@@ -45,6 +45,8 @@ import (
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/libp2p/go-libp2p-core/peerstore"
 
+	"github.com/libp2p/go-libp2p/p2p/muxer/mplex"
+
 	"github.com/multiformats/go-multiaddr"
 )
 
@@ -164,6 +166,7 @@ func makeHost(port int, randomness io.Reader) (host.Host, error) {
 	return libp2p.New(
 		libp2p.ListenAddrs(sourceMultiAddr),
 		libp2p.Identity(prvKey),
+		libp2p.Muxer("/mplex/6.7.0", mplex.DefaultTransport),
 	)
 }
 
